@@ -13,17 +13,17 @@ for line in open('input', 'r'):
   # High card
   score = 0
   # One pair
-  if max_count == 2 and (counts.count(2) == 1): score = 371293 * 2
+  if max_count == 2 and (counts.count(2) == 1): score = multiplier * 2
   # Two pair
-  if max_count == 2 and (counts.count(2) == 2): score = 371293 * 3
+  if max_count == 2 and (counts.count(2) == 2): score = multiplier * 3
   # Three of a kind
-  if max_count == 3 and (2 not in counts): score = 371293 * 4
+  if max_count == 3 and (2 not in counts): score = multiplier * 4
   # Full house
-  if max_count == 3 and (2 in counts): score = 371293 * 5
+  if max_count == 3 and (2 in counts): score = multiplier * 5
   # Four of a kind
-  if max_count == 4: score = 371293 * 6
+  if max_count == 4: score = multiplier * 6
   # Five of a kind
-  if max_count == 5: score = 371293 * 7
+  if max_count == 5: score = multiplier * 7
 
   # Add card values
   for i, c in enumerate(hand):

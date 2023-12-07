@@ -13,17 +13,17 @@ for line in open('input', 'r'):
   # High card
   score = 0
   # One pair
-  if (max_count == 2 and (counts.count(2) == 1)) or counts[12] >= 1: score = 371293 * 2
+  if (max_count == 2 and (counts.count(2) == 1)) or counts[12] >= 1: score = multiplier * 2
   # Two pair
-  if (max_count == 2 and (counts.count(2) == 2)) or (max_count == 2 and counts[12] >= 1) or (max_count == 1 and counts[12] >= 2): score = 371293 * 3
+  if (max_count == 2 and (counts.count(2) == 2)) or (max_count == 2 and counts[12] >= 1) or (max_count == 1 and counts[12] >= 2): score = multiplier * 3
   # Three of a kind
-  if max_count == 3 or (max_count == 2 and counts[12] >= 1) or (max_count == 1 and counts[12] >= 2): score = 371293 * 4
+  if max_count == 3 or (max_count == 2 and counts[12] >= 1) or (max_count == 1 and counts[12] >= 2): score = multiplier * 4
   # Full house (tricky)
-  if (max_count == 3 and (2 in counts)) or (max_count == 2 and counts.count(2) == 2 and counts[12] == 1): score = 371293 * 5
+  if (max_count == 3 and (2 in counts)) or (max_count == 2 and counts.count(2) == 2 and counts[12] == 1): score = multiplier * 5
   # Four of a kind
-  if max_count == 4 or (max_count == 3 and counts[12] >= 1) or (max_count == 2 and counts.count(2) == 2 and counts[12] >= 2) or (counts[12] >= 3): score = 371293 * 6
+  if max_count == 4 or (max_count == 3 and counts[12] >= 1) or (max_count == 2 and counts.count(2) == 2 and counts[12] >= 2) or (counts[12] >= 3): score = multiplier * 6
   # Five of a kind
-  if max_count == 5 or (max_count == 4 and counts[12] == 1) or (max_count == 3 and counts[12] == 2) or ((2 in counts) and counts[12] == 3) or (counts[12] == 4): score = 371293 * 7
+  if max_count == 5 or (max_count == 4 and counts[12] == 1) or (max_count == 3 and counts[12] == 2) or ((2 in counts) and counts[12] == 3) or (counts[12] == 4): score = multiplier * 7
 
   # Add card values
   for i, c in enumerate(hand):
