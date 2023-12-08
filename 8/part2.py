@@ -122,6 +122,11 @@ for start in currents:
 # IF YOU JUST LAZILY TOOK THE LCM OF THE MAX VALUES. YOU'D GET THE ANSWER?!
 # THAT'S REAL SILLY!! I WILL SOLVE THIS GENERALLY TYVM.
 
+# 'small3' contains an input that will not be solvable if you just assume the
+# cycles are aligned on their phases (just do an LCM). That's a silly assumption,
+# but what can you do. This implementation will solve the general case of looking
+# for any phase.
+
 # It will be every multiple of each offset and each cycle
 # So for a offset/cycle chain of: (1, 'A', (4, 'Z1', (2, 'Z2', (4, 'Z1', -1))))
 # it would go: 1, 5, 7, 11, 13, etc, as it pings back and forth between Z1 and Z2
@@ -172,18 +177,12 @@ def combine_phased_rotations(a_period, a_phase, b_period, b_phase):
   phase_difference = a_phase - b_phase
   pd_mult, pd_remainder = divmod(phase_difference, gcd)
   if pd_remainder:
-    raise ValueError("Rotation reference points never synchronize.")
+    #raise ValueError("Rotation reference points never synchronize.")
+    return (9999999999999999999, 9999999999999999999999,)
 
   combined_period = a_period // gcd * b_period
   combined_phase = (a_phase - s * pd_mult * a_period) % combined_period
   return combined_period, combined_phase
-
-def arrow_alignment(red_len, green_len, advantage):
-  """Where the arrows first align, where green starts shifted by advantage"""
-  period, phase = combine_phased_rotations(
-    red_len, 0, green_len, -advantage % green_len
-  )
-  return -phase % period
 
 def extended_gcd(a, b):
   """Extended Greatest Common Divisor Algorithm
@@ -208,14 +207,14 @@ def extended_gcd(a, b):
 
 answer = min(
   map(
-    lambda pairs: reduce(
+    lambda pairs: sum(reduce(
       lambda a, b: list(
         reversed(
           combine_phased_rotations(a[1], a[0], b[1], b[0])
         )
       ),
       pairs
-    )[1],
+    )),
     product(*polynomial_set)
   )
 )
