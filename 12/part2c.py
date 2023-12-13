@@ -31,10 +31,8 @@ def search(span, start, counts):
   sub_total = 0
   for i in range(start, len(span) - counts[0] + 1):
     # Is it here?
-    #print('looking', i, span[i:counts[0] + i], counts[0], counts)
     if not '.' in span[i:counts[0] + i] and (i + counts[0] == len(span) or span[i + counts[0]] != '#') and (i == 0 or span[i - 1] != '#'):
       # Yes.
-      #print('found', i, span[i:counts[0] + i], counts[1:])
       sub_total += search(span, i + counts[0] + 1, counts[1:])
 
     if span[i] == '#':
